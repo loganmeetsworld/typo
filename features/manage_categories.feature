@@ -18,5 +18,12 @@ Feature: Manage Categories
     Then I should see "Food"
     And I should see "Cars"
     And I should see "Foobar"
-    When I press "Edit"
-    And I fill in "category_anem" with "Lorem Ipsum"
+
+  Scenario: Editing a Category
+    Given I am on the edit category page
+    And I fill in "category_name" with "Lorem Ipsum"
+    When I fill in "category_name" with "Different Thing"
+    And I press "Save"
+    Then I should be on the list of categories
+    Then I should see "Different Thing"
+    And I should not see "General"

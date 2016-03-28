@@ -29,7 +29,11 @@ class Admin::ContentController < Admin::BaseController
 
   def merge_with
     @article = Article.new(params[:article])
-    
+    @merged_article = Article.find(params[:merge_with])
+
+    @article.body += @merged_article.body
+    @article.title = @merged_article.title
+
     if @article.save!
       flash[:notice] = _('Article was successfully merged.')
     else

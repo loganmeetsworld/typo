@@ -21,6 +21,8 @@ module NavigationHelpers
       '/admin/categories/new'
     when /^the edit category page$/
       '/admin/categories/edit/1'
+    when /^article one's page$/
+      "#{Time.now.year}/#{Time.now.month}/#{Time.now.day}/hello-world"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

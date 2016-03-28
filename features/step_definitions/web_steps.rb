@@ -282,3 +282,7 @@ Given /^I have categories titled (.+)$/ do |titles|
     Category.create!(:name => name)
   end
 end
+
+Then /^I should see "([^"]*)" in the selector "([^"]*)"$/ do |text, selector|
+  page.should have_selector(selector, text: text)
+end

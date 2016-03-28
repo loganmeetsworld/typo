@@ -276,3 +276,9 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Given /^I have categories titled (.+)$/ do |titles|
+  titles.split(', ').each do |name|
+    Category.create!(:name => name)
+  end
+end

@@ -146,6 +146,17 @@
     <ul id='attachments' class='inputs-list'>
       <%= render 'admin/content/attachment', { :attachment_num => 1, :hidden => false } -%>
     </ul>
+  </div> 
+
+  <div class=''>
+    <h4><%= _("Merge Articles") %></h4>
+    <form class="form-inline">
+      <div class="form-group">
+        <label for="exampleInputName2">Article ID</label>
+        <input type="number" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+      </div>
+      <button type="submit" class="btn btn-default">Merge</button>
+    </form>
   </div>    
   </div>
 

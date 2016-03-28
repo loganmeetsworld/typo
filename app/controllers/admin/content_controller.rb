@@ -30,7 +30,7 @@ class Admin::ContentController < Admin::BaseController
     @article.body += @merged_article.body
     @article.title = @merged_article.title
 
-    if @article.save!
+    if @article.update!
       flash[:notice] = _('Article was successfully merged.')
     else
       flash[:error] = _('Article could not be merged.')

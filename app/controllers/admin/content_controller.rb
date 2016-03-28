@@ -25,9 +25,9 @@ class Admin::ContentController < Admin::BaseController
 
   def merge
     @article = Article.new(params[:article])
-    @merged_article = Article.find(params[:merge_with])
+    @merged_article = Article.find(params[:content][:merge])
 
-    @article.body += @merged_article.body
+    @article.body_and_extended += @merged_article.body_and_extended
     @article.title = @merged_article.title
 
     if @article.update!

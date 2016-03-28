@@ -150,13 +150,15 @@
 
   <div class=''>
     <h4><%= _("Merge Articles") %></h4>
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="exampleInputName2">Article ID</label>
+      <%= form_for(admin_content_merge_path) do |f| %>
+      <div class="field">
+        <%= f.label :Article_id %><br>
+        <%= f.number_field :article_id %>
       </div>
-      <%= number_field 'content', 'merge' %>
-      <input id='merge' type="submit" value="<%= _('Merge') %>" name="merge" class='btn info' />
-    </form>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
   </div>    
   </div>
 

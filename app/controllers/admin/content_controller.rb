@@ -27,6 +27,17 @@ class Admin::ContentController < Admin::BaseController
     new_or_edit
   end
 
+  def merge_with
+    @article = Article.new(params[:article])
+    
+    if @article.save!
+      flash[:notice] = _('Article was successfully merged.')
+    else
+      flash[:error] = _('Article could not be merged.')
+    end
+    redirect_to :action => 'new'
+  end
+
   def edit
     @article = Article.find(params[:id])
     unless @article.access_by? current_user

@@ -23,11 +23,7 @@ class Admin::ContentController < Admin::BaseController
     end
   end
 
-  def new
-    new_or_edit
-  end
-
-  def merge_with
+  def merge
     @article = Article.new(params[:article])
     @merged_article = Article.find(params[:merge_with])
 
@@ -39,7 +35,12 @@ class Admin::ContentController < Admin::BaseController
     else
       flash[:error] = _('Article could not be merged.')
     end
-    redirect_to :action => 'new'
+    
+    redirect_to :action => 'index'
+ end
+
+  def new
+    new_or_edit
   end
 
   def edit

@@ -155,7 +155,8 @@
         <label for="exampleInputName2">Article ID</label>
         <input type="number" class="form-control" id="merge_with" placeholder="id">
       </div>
-      <input id='merge_with' type="submit" value="<%= _('Merge') %>" name="merge_with" class='btn info' />
+      <%= number_field 'content', 'merge' %>
+      <input id='merge' type="submit" value="<%= _('Merge') %>" name="merge" class='btn info' />
     </form>
   </div>    
   </div>

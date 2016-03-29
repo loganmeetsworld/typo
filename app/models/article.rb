@@ -82,7 +82,7 @@ class Article < Content
 
   def merge_with(id)
     # Update the article by adding the other article's body to it
-    self.update_artibute(:body, self.body + Article.find(id).body)
+    self.update_attribute(:body, self.body + Article.find(id).body)
     
     # Update the article by adding the other article's comments to it
     merged_articles_comments = Comment.find_all_by_article_id(id)

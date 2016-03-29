@@ -25,7 +25,7 @@ class Admin::ContentController < Admin::BaseController
 
   def merge
     if current_user.admin?
-      @article = Article.get_or_build_article(parms[:merge_with])
+      @article = Article.get_or_build_article(params[:merge_with])
       @article.merge_with(params[:article_id])
       
       flash[:notice] = _('Article was successfully merged.')

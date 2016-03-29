@@ -5,25 +5,32 @@ Feature: Merge Articles
 
   Background:
     Given the blog is set up
-    And an article named "Hello, World" with 2 comments
-    And an article named "Goodbye, World" with 1 comment
 
-  Scenario: Admin user can merge articles
-    Given I am logged into the admin panel
+    Given the following articles exist:
+    | title          | body   | user_id | published |
+    | Hello, World   | hiiiii | 1       | true      |
+    | Goodbye, World | biiiii | 2       | true      |
+
+    Given the following comments exist: 
+    | author | body          | article_id |
+    | Logan  | Hi            | 3          |
+    | Audrey | Whatup        | 3          |
+    | Jennie | No problem    | 4          |
+    | Becca  | Great content | 4          |
+
+  Scenario: When articles get merged, they contain the merged information, same title, and same author
+    And I am logged into the admin panel
     And I click "All Articles"
-    And I click "Hello, World"
-    And I fill in "merge" with "2"
+    And I click "Goodbye, World"
+    And I fill in "merge_with" with "3"
     And I press "Merge"
-    Then I should be on the content admin page
-    When I go to home
-    And I click on "All Articles"
-    Then I should see one article
-    And I should see "Hello, World"
+    Then I should see "was successful"
     And I should not see "Goodbye, World"
-    And the article should have 3 comments
-
-  Scenario: Non-admin users cannot merge articles
-    Given I am logged in as a non-admin
-    And I follow "All Articles"
-    And I follow "Hello, World"
-    Then I should not see "Merge Articles"
+    When I follow "Hello, World"
+    Then I should see "hiiiii"
+    And I should see "biiiii"
+    When I follow "Comments"
+    Then I should see "Hi"
+    And I should see "Whatup"
+    And I should see "No problem"
+    And I should see "Great content"

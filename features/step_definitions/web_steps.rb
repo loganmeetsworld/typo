@@ -41,11 +41,29 @@ Given /^the blog is set up$/ do
                 :profile_id => 1,
                 :name => 'admin',
                 :state => 'active'})
+  User.create!({:login => 'logan',
+              :password => 'aaaaaaaa',
+              :email => 'logan@great.com',
+              :profile_id => 2,
+              :name => 'logan',
+              :state => 'active'})
 end
 
 And /^I am logged into the admin panel$/ do
   visit '/accounts/login'
   fill_in 'user_login', :with => 'admin'
+  fill_in 'user_password', :with => 'aaaaaaaa'
+  click_button 'Login'
+  if page.respond_to? :should
+    page.should have_content('Login successful')
+  else
+    assert page.has_content?('Login successful')
+  end
+end
+
+And /^I am not logged into the admin panel$/ do
+  visit '/accounts/login'
+  fill_in 'user_login', :with => 'logan'
   fill_in 'user_password', :with => 'aaaaaaaa'
   click_button 'Login'
   if page.respond_to? :should
@@ -289,4 +307,20 @@ end
 
 Then /^the "(.*?)" field should be empty$/ do |arg1|
   arg1 == nil
+end
+
+Given /the following articles exist/ do |articles_table|
+  articles_table.hashes.each do |article|
+    Article.create!(article)
+  end
+end
+
+Given /the following comments exist/ do |comments_table|
+  comments_table.hashes.each do |comment|
+    a = Comment.create!(comment)
+  end
+end
+
+Given /^I click "(.*?)"$/ do |link|
+  click_link(link)
 end

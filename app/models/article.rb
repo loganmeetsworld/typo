@@ -81,8 +81,11 @@ class Article < Content
   end
 
   def merge_with(id)
-    self.update_artibute(:body, self.body + Article.find(id).body)
-    merged_articles_comments = Comment.find
+    # Update the article by adding the other article's body to it
+    
+    # Update the article by adding the other article's comments to it
+
+    # Destroy the other article
   end
 
   attr_accessor :draft, :keywords

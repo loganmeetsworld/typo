@@ -24,18 +24,14 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    @article = Article.new(params[:article])
-    @merged_article = Article.find(params[:content][:merge])
-
-    @article.body_and_extended += @merged_article.body_and_extended
-    @article.title = @merged_article.title
-
-    if @article.update!
+    if current_user.admin?
+      @article = Article.get_or_build_article(parms[:merge_with])
+      @article.merge_with(params[:article_id])
+      
       flash[:notice] = _('Article was successfully merged.')
     else
-      flash[:error] = _('Article could not be merged.')
+      flash[:error] = _('You are not allowed to perform this action.')
     end
-    
     redirect_to :action => 'index'
  end
 

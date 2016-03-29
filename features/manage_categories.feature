@@ -7,7 +7,7 @@ Feature: Manage Categories
     Given the blog is set up
     And I am logged into the admin panel
 
-  Scenario: Categories List
+  Scenario: Adding a category
     Given I have categories titled Food, Cars
     When I go to the list of categories
     Then I should see "Food"
@@ -27,3 +27,6 @@ Feature: Manage Categories
     Then I should be on the list of categories
     Then I should see "Different Thing"
     And I should not see "General"
+    When I follow "Cancel"
+    Then I should be on the list of categories
+    And the "category_name" field should be empty

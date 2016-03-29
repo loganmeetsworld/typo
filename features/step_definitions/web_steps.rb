@@ -286,3 +286,7 @@ end
 Then /^I should see "([^"]*)" in the selector "([^"]*)"$/ do |text, selector|
   page.should have_selector(selector, text: text)
 end
+
+Then /^the "(.*?)" field should be empty$/ do |arg1|
+  arg1 == nil
+end

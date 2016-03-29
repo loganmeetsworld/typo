@@ -1,4 +1,4 @@
-Feature: Manage Categories
+Feature: Merge Articles
   As a blog administrator
   In order to condense similar articles
   I want to be able to merge articles

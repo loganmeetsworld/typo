@@ -5,26 +5,25 @@ Feature: Merge Articles
 
   Background:
     Given the blog is set up
-    And I am logged into the admin panel
+    And an article named "Hello, World" with 2 comments
+    And an article named "Goodbye, World" with 1 comment
 
-  Scenario: Creating a new article
-    Given I am on the new article page
-    When I fill in "article_title" with "Hello"
-    And I fill in "article__body_and_extended_editor" with "Lorem Ipsum"
-    And I press "Publish"
-    Then I should be on the admin content page
-    When I go to the home page
-    Then I should see "Hello World!"
-    And I should see "Lorem Ipsum"
-    And I should see "Welcome to Typo. This is your first article. Edit or delete it, then start blogging!"
-    When I go to the new article page
-    When I fill in "article_title" with "Another Article"
-    And I fill in "article__body_and_extended_editor" with "More content"
-    And I fill in "content_merge" with "1"
+  Scenario: Admin user can merge articles
+    Given I am logged into the admin panel
+    And I click "All Articles"
+    And I click "Hello, World"
+    And I fill in "merge" with "2"
     And I press "Merge"
-    Then I should be on the admin content page
-    When I go to the home page
-    Then I should see "Hello World!"
-    And I should see "Lorem Ipsum"
-    And I should see "More Content"
-    And I should not see "Another Article"
+    Then I should be on the content admin page
+    When I go to home
+    And I click on "All Articles"
+    Then I should see one article
+    And I should see "Hello, World"
+    And I should not see "Goodbye, World"
+    And the article should have 3 comments
+
+  Scenario: Non-admin users cannot merge articles
+    Given I am logged in as a non-admin
+    And I follow "All Articles"
+    And I follow "Hello, World"
+    Then I should not see "Merge Articles"

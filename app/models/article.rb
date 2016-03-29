@@ -82,10 +82,18 @@ class Article < Content
 
   def merge_with(id)
     # Update the article by adding the other article's body to it
+    self.update_artibute(:body, self.body + Article.find(id).body)
     
     # Update the article by adding the other article's comments to it
+    merged_articles_comments = Comment.find_all_by_article_id(id)
+
+    # Update comments to redirect relationship to this article
+    merged_articles_comments.each  do |comment| 
+      comment.update_attribute(:article_id, self.id)
+    end
 
     # Destroy the other article
+    Article.find(id).destroy
   end
 
   attr_accessor :draft, :keywords

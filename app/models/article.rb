@@ -80,6 +80,11 @@ class Article < Content
     Article.exists?({:parent_id => self.id})
   end
 
+  def merge_with(id)
+    self.update_artibute(:body, self.body + Article.find(id).body)
+    merged_articles_comments = Comment.find
+  end
+
   attr_accessor :draft, :keywords
 
   has_state(:state,

@@ -148,19 +148,8 @@
     </ul>
   </div> 
 
-  <div class=''>
-    <h4><%= _("Merge Articles") %></h4>
-      <%= form_for(admin_content_merge_path(@merged_article)) do |f| %>
-      <div class="field">
-        <%= f.label :Article_id %><br>
-        <%= f.number_field :article_id %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
-    <% end %>
-  </div>    
-  </div>
-
+  <% if current_user.admin? %> 
+    <%= render "merge" %>  
+  <% end %> 
 </div>
 

@@ -12,15 +12,15 @@ Feature: Merge Articles
     | Goodbye, World | biiiii | 2       | true      |
 
     Given the following comments exist: 
-    | author | body          | article_id |
-    | Logan  | Hi            | 3          |
-    | Audrey | Whatup        | 3          |
-    | Jennie | No problem    | 4          |
-    | Becca  | Great content | 4          |
+    | author | body           | article_id |
+    | Logan  | First comment  | 3          |
+    | Audrey | Second comment | 3          |
+    | Jennie | Third comment  | 4          |
+    | Becca  | Fourth comment | 4          |
 
   Scenario: When articles get merged, they contain the merged information, same title, and same author
-    And I am logged into the admin panel
-    And I click "All Articles"
+    Given I am logged into the admin panel
+    Then I click "All Articles"
     And I click "Goodbye, World"
     And I fill in "merge_with" with "3"
     And I press "Merge"
@@ -30,7 +30,7 @@ Feature: Merge Articles
     Then I should see "hiiiii"
     And I should see "biiiii"
     When I follow "Comments"
-    Then I should see "Hi"
-    And I should see "Whatup"
-    And I should see "No problem"
-    And I should see "Great content"
+    Then I should see "First comment"
+    And I should see "Second comment"
+    And I should see "Third comment"
+    And I should see "Fourth comment"
